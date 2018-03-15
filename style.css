@@ -1,17 +1,49 @@
 body {
-	background: white;
+	margin: 0;
+	padding: 0;
+	background: url('background.jpeg');
+	background-repeat: no-repeat;
+	background-position: cover;
 }
 
 
+.title {
+	text-align: center;
+}
+
+.game {
+	display: flex;
+	justify-content: space-around;
+	padding-top: 70px;
+	text-align: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
 .holes {
-	height: 30px;
-	width: 100%;
+	height: 100px;
+	width: 25vw;
 }
 
 .moles {
 	display: none;
+	cursor: pointer;
+	width: 50%;
+	margin-left: 50%;
+	transform: translate(-50%,-50%); 
 }
 
 .active {
 	display: block;
+}
+
+.controls {
+	padding-top: 15px;
+}
+
+.controls button {
+	margin-left: 50%;
+	margin-top: 0px;  
+	transform: translate(-50%, -50%);
+	width: 10%;
 }
