@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Whack A Mole! </title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="title"> <span class="title"> Whack A Mole </span>
+							<span class="scoreboard"> </span>
+		<div class="game">
+			<div class="holes"> <div class="moles"> Mole 1 </div> </div>
+			<div class="holes"> <div class="moles"> Mole 2 </div> </div>
+			<div class="holes"> <div class="moles"> Mole 3 </div> </div>
+			<div class="holes"> <div class="moles"> Mole 4 </div> </div>
+			<div class="holes"> <div class="moles"> Mole 5 </div> </div>
+			<div class="holes"> <div class="moles"> Mole 6 </div> </div>
+		</div>
+		<div class="controls">
+			<button class="start" onclick="gameStart()"> Start </button>
+			<button class="stop" onclick="gameStop()"> Stop </button>
+	</div>	
+</body>
+
+
+<script type="text/javascript">
+
+	var moles = document.querySelectorAll('.moles');
+	var lastHole;
+	var gameStatus;
+	var score = 0;
+	document.querySelectorAll('.scoreboard')[0].innerHTML = score;
+
+
+	function randTime(start, end) {
+		return Math.round( Math.random()*(end - start) + start );
+	}
+
+	function randMole(moles) {
+		id = Math.floor( Math.random()*(moles.length));	
+		hole = moles[id];
+		if (hole === lastHole) {
+			randMole(moles);
+		}
+		console.log(id);
+		lastHole = hole;
+		return hole;
+	}
+
+	function pop() {
+		var time = randTime(200,1500);
+		var hole = randMole(moles);
+		hole.classList.add('active');
+		setTimeout( 
+			function() {
+				hole.classList.remove('active');
+				if(gameStatus) pop();
+			}, time );
+	}
+
+
+
+	function gameStart() {
+		gameStatus = true;
+		pop();
+		setTimeout ( function() {
+			gameStatus = false;
+		},30000);
+	}
+
+	function gameStop() {
+		gameStatus = false;
+		hole.classList.remove('active');
+	}
+
+	function scoreFunc(element) {
+		if(!element.isTrusted) return;
+		score++;
+		hole.classList.remove('active');
+		document.querySelectorAll('.scoreboard')[0].innerHTML = score;
+	}
+
+	moles.forEach(function(element) { element.addEventListener('click', scoreFunc ); } );
+
+</script>
+</html>

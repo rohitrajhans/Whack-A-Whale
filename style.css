@@ -1,0 +1,17 @@
+body {
+	background: white;
+}
+
+
+.holes {
+	height: 30px;
+	width: 100%;
+}
+
+.moles {
+	display: none;
+}
+
+.active {
+	display: block;
+}
